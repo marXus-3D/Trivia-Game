@@ -170,6 +170,9 @@ var currentIndex = 0,
   currentCash = 100;
 const question = document.createElement("div");
 question.classList += "question-container";
+const clock = $('.clock');
+var seconds = 60;
+const message = $('.message');
 
 // window.onload = ()=>{
 //     addQuestion();
@@ -180,6 +183,8 @@ $(".play").click(function (e) {
   // $(this).parent().hide();
   $(this).hide();
   addQuestion();
+  message.text('Okay let\' start with the first question.')
+  setInterval(clockCount, 1000);
 });
 
 function checkAnswer(answer) {
@@ -192,6 +197,7 @@ function checkAnswer(answer) {
     currentCash -= currentCash/5;
   }
   newQuestion();
+  seconds = 30;
 }
 
 function newQuestion() {
@@ -231,4 +237,9 @@ function addQuestion() {
     e.preventDefault();
     checkAnswer($(this).text().slice(3));
   });
+}
+
+
+function clockCount() {
+    clock.text(seconds--);
 }
