@@ -7,16 +7,123 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="gameSection">
+   <center>
+    <section class="game">
+      <main class="gameSection">
+        <div class="lifeline">
+          <button id="aiBtn">Ask AI</button>
+          <button>Remove Answers</button>
+          <button>Ask Audience</button>
+        </div>
+        <h4 class="clock">30</h4>
+        <div class="messageBox">
+          <p class="message">Welcome to IZZY Trivia. <br> Press Play to start.</p>
+        </div>
+        <section class="start-menu">
+          <img src="assets/logo.png" alt="">
+        <button class="play">PLAY</button>
+      </section><!--
+        <header class="top-bar">
+          <button id="cashOut">$Cash Out$</button>
+          <h1>Millionare Trivia</h1>
+          <h3 class="money">$100</h3>
+        </header>
+        <div class="start-menu">
+          <button class="play">PLAY</button>
+        </div> -->
+        <div class="win-screen" style="display: none">
+          <h2>You Win</h2>
+          <p>You Answered 9 out of 10 questions.</p>
+        </div>
+      </main>
+      <!-- <div class="question-container">
+        <div class=question>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+        <div class=answers>
+          <button class="ansBtn">A. button</button>
+          <button class="ansBtn">B. button</button>
+          <button class="ansBtn">C. button</button>
+          <button class="ansBtn">D. button</button>
+        </div>
+      </div> -->
+    </section>
+   </center>
+   <section class="chat-pop" style="display: none">
+    <div class="blur"></div>
+    <div class="chat-section">
+      <h4>Ask AI</h4>
+      <hr />
+      <section class="chat-view">
+        <div class="chat-user">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            blanditiis officiis explicabo.
+          </p>
+        </div>
+        <div class="chat-ai">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+        </div>
+        <div class="chat-ai">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+        </div>
+        <div class="chat-user">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+        </div>
+        <div class="chat-ai">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+        </div>
+        <div class="chat-user">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+        </div>
+        <div class="chat-ai">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
+            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+        </div>
+      </section>
+      <form>
+        <input
+          type="text"
+          placeholder="Ask the about your question"
+          required
+        />
+        <button class="sendBtn"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000"><path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/></svg></button>
+      </form>
+    </div>
+  </section>
+    <!-- <main class="gameSection">
       <h4 class="clock">60</h4>
       <div class="messageBox">
         <p class="message">Welcome to IZZY Trivia. <br> Press Play to start.</p>
       </div>
-      <!-- <section class="start-menu">
+       <section class="start-menu">
       <h1>IZZY Trivia</h1>
       <button class="play">PLAY</button>
     </section> -->
-      <header class="top-bar">
+      <!-- <header class="top-bar">
         <button id="cashOut">$Cash Out$</button>
         <h1>Millionare Trivia</h1>
         <h3 class="money">$100</h3>
@@ -93,7 +200,7 @@
         <h2>You Win</h2>
         <p>You Answered 9 out of 10 questions.</p>
       </div>
-    </main>
+    </main> -->
   </body>
 </html>
 <script src="jquery.js"></script>

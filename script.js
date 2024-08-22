@@ -171,20 +171,28 @@ var currentIndex = 0,
 const question = document.createElement("div");
 question.classList += "question-container";
 const clock = $('.clock');
-var seconds = 60;
+var seconds = 30;
 const message = $('.message');
+const game = document.querySelector('.game');
+const aiBtn = $('#aiBtn');
+game.appendChild(question);
 
 // window.onload = ()=>{
 //     addQuestion();
 // };
 
+aiBtn.click(function (e) { 
+  e.preventDefault();
+  $('.chat-pop').show();
+});
+
 $(".play").click(function (e) {
   e.preventDefault();
-  // $(this).parent().hide();
-  $(this).hide();
+  $(this).parent().hide();
+  // $(this).hide();
+  setInterval(clockCount, 1000);
   addQuestion();
   message.text('Okay let\' start with the first question.')
-  setInterval(clockCount, 1000);
 });
 
 function checkAnswer(answer) {
@@ -197,7 +205,6 @@ function checkAnswer(answer) {
     currentCash -= currentCash/5;
   }
   newQuestion();
-  seconds = 30;
 }
 
 function newQuestion() {
@@ -231,15 +238,23 @@ function addQuestion() {
         </div>
     `;
 
-  document.body.appendChild(question);
-
-  $("button").click(function (e) {
+  $(".ansBtn").click(function (e) {
     e.preventDefault();
     checkAnswer($(this).text().slice(3));
   });
+
+  seconds = 30;
 }
 
 
 function clockCount() {
-    clock.text(seconds--);
+  if(seconds<1){
+    currentCash -= currentCash/5;
+    newQuestion();
+  }
+  else if (seconds<10) {
+    clock.text(`0${--seconds}`)
+  }
+  else
+    clock.text(--seconds);
 }
