@@ -121,6 +121,7 @@ const questions = [
     "lifelines": ["50/50", "Ask the Audience", "Phone a Friend"]
   }
 ];
+questions = shuffleArray(questions);
 const doubleOrNothhingQuestions = [
     {
         question: "What is the name of the largest known prime number?",
@@ -165,6 +166,7 @@ const doubleOrNothhingQuestions = [
         "lifelines": ["50/50", "Ask the Audience", "Phone a Friend"]
       },
 ];
+doubleOrNothhingQuestions = shuffleArray(doubleOrNothhingQuestions);
 var currentIndex = 0,
   userAnswers = 0,
   currentCash = 100;
@@ -246,6 +248,13 @@ function addQuestion() {
   seconds = 30;
 }
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 function clockCount() {
   if(seconds<1){
