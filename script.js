@@ -1,4 +1,4 @@
-const questions = [
+let questions = [
   {
     question: "Who stole the apple.",
     answers: ["A. George", "B. Jamal", "C. William", "D. Tyrone"],
@@ -122,7 +122,7 @@ const questions = [
   }
 ];
 questions = shuffleArray(questions);
-const doubleOrNothhingQuestions = [
+let doubleOrNothhingQuestions = [
     {
         question: "What is the name of the largest known prime number?",
         answers: ["A. Mersenne Prime", "B. Fermat Prime", "C. Twin Prime", "D. M8257582"],
@@ -165,6 +165,42 @@ const doubleOrNothhingQuestions = [
         "correctAnswer": "Harper Lee",
         "lifelines": ["50/50", "Ask the Audience", "Phone a Friend"]
       },
+];
+
+const littleTimeLeftJokes = [
+  {
+    joke: "We’re down to the wire—like a cat on a high shelf, it’s getting exciting up here!",
+  }, 
+  {
+    joke: "We're almost out of time—better hurry, or you might just be writing a novel on that answer!",
+  },
+  {
+    joke: "The clock’s ticking down! Hurry up before your answer turns into a dinosaur fossil!",
+  },
+  {
+    joke: "Time’s almost up! And if you don’t get this right, well, let’s just say the replay will be entertaining!",
+  },
+  {
+    joke: "We’re almost out of time, and if you don’t hurry, we might need to call in a rescue team!",
+  },
+];
+
+const winningJokes = [
+  {
+    joke: "Congratulations! You’ve won the game and officially earned bragging rights for the next century!",
+  },
+  {
+    joke: "You did it! You’ve won a lot of money and possibly made everyone else question their life choices!",
+  },
+];
+
+const losingJokes = [
+  {
+    joke: "Looks like you didn’t win—don’t worry, you’re still the best at losing with style!",
+  },
+  {
+    joke: "You didn’t win, but don’t worry, you’ve still achieved the ‘almost’ status with flying colors!",
+  },
 ];
 doubleOrNothhingQuestions = shuffleArray(doubleOrNothhingQuestions);
 var currentIndex = 0,

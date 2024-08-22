@@ -159,12 +159,18 @@ body{
     transition: all 0.5s ease;
 }
 
+.win-screen {
+    position: absolute;
+    bottom: 0;
+    height: 42%;
+    border: 10px solid red;
+}
 
 .win-screen h2{
-    font-size: 80px;
+    font-size: 70px;
 }
 .win-screen p{
-    font-size: 72px;
+    font-size: 60px;
 }
 
 .chat-pop{
