@@ -251,14 +251,34 @@ function newQuestion() {
     alert(
       `Congratulations you finished You answered ${userAnswers} out of ${questions.length} questions`
     );
+    checkWin();
+  } else {
+    // alert('New Question');
+    addQuestion();
+  }
+}
+
+function checkWin() {
+  seconds = 0;
+  if(userAnswers > (questions.length*0.65))
+  {
     $(".question-container").hide();
     $(".win-screen p").text(
       `You Answered ${userAnswers} out of ${questions.length} questions.`
     );
     $(".win-screen").show();
-  } else {
-    // alert('New Question');
-    addQuestion();
+
+    message.text(winningJokes[Math.floor(Math.random() * winningJokes.length)].joke);
+  }
+  else
+  {
+    $(".question-container").hide();
+    $('.win-screen h2').text('You Lose');
+    $(".win-screen p").text(
+      `You Answered ${userAnswers} out of ${questions.length} questions.`
+    );
+    $(".win-screen").show();
+    message.text(losingJokes[Math.floor(Math.random() * losingJokes.length)].joke);
   }
 }
 
