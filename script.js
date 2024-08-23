@@ -265,9 +265,14 @@ $('.lifeline button').click(function (e) {
     $(".chat-pop").show(200);
   }
   if($(this).hasClass('rmv')){
-    const otherButtons = $(`.ansBtn[val]:not([val="${questions[currentIndex].correctAnswer}"])`);
-    console.log(otherButtons[2]);
-    otherButtons.hide();
+    const otherButtons = document.querySelectorAll(`.ansBtn[val]:not([val="${questions[currentIndex].correctAnswer}"])`);
+    const idx1 = Math.floor(Math.random() * 3);
+    let idx2;
+    do {
+      idx2 = Math.floor(Math.random() * 3);
+    } while (idx2 === idx1);
+    otherButtons[idx1].style.opacity = "0";
+    otherButtons[idx2].style.opacity = "0";
   }
 });
 
