@@ -11,9 +11,9 @@
     <section class="game">
       <main class="gameSection">
         <div class="lifeline">
-          <button id="aiBtn">Ask AI</button>
-          <button>Remove Answers</button>
-          <button>Ask Audience</button>
+          <button class="aiBtn">Ask AI</button>
+          <button class="rmv">Remove<br>Answers</button>
+          <button>Ask<br>Audience</button>
         </div>
         <h4 class="clock">30</h4>
         <div class="messageBox">
@@ -21,7 +21,7 @@
         </div>
         <section class="start-menu">
           <img src="assets/logo.png" alt="">
-        <button class="play">PLAY</button>
+        <button class="play" style="color: #421f1d;">PLAY</button>
       </section><!--
         <header class="top-bar">
           <button id="cashOut">$Cash Out$</button>
@@ -49,10 +49,13 @@
       </div>
     </section>
    </center>
-   <section class="chat-pop" style="display: none">
+   <section class="chat-pop" style="display: none;">
     <div class="blur"></div>
     <div class="chat-section">
-      <h4>Ask AI</h4>
+      <div class="title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <h4>Ask AI</h4>
+        <button class="exit"></button>
+      </div>
       <hr />
       <section class="chat-view">
         <div class="chat-user">

@@ -215,6 +215,11 @@ let doubleOrNothhingQuestions = [
   },
 ];
 
+const tooManyWrongQuestionsJokes = [
+  {
+    joke: "",
+  }
+];
 const littleTimeLeftJokes = [
   {
     joke: "We’re down to the wire—like a cat on a high shelf, it’s getting exciting up here!",
@@ -251,6 +256,21 @@ const losingJokes = [
   },
 ];
 
+$('.lifeline button').click(function (e) { 
+  e.preventDefault();
+  $(this).css('background-image', 'url("assets/lifeDisable.png")');
+  $(this).prop('disabled', true);
+
+  if($(this).hasClass('aiBtn')){
+    $(".chat-pop").show(200);
+  }
+  if($(this).hasClass('rmv')){
+    const otherButtons = $(`.ansBtn[val]:not([val="${questions[currentIndex].correctAnswer}"])`);
+    console.log(otherButtons[2]);
+    otherButtons.hide();
+  }
+});
+
 doubleOrNothhingQuestions = shuffleArray(doubleOrNothhingQuestions);
 var currentIndex = 0,
   userAnswers = 0,
@@ -261,7 +281,6 @@ const clock = $(".clock");
 var seconds = 30;
 const message = $(".message");
 const game = document.querySelector(".game");
-const aiBtn = $("#aiBtn");
 game.appendChild(question);
 
 let timerJokeBool = false;
@@ -270,12 +289,13 @@ window.onload = () => {
   // $(".start-menu").slideUp("fast", "swing");
   // $(".start-menu").slideDown("fast", "swing");
   $(".start-menu").animate({bottom: "50px"}, 1500, "swing");
+  $('.lifeline, .clock').hide();
   // alert('loaded');
 };
 
-aiBtn.click(function (e) {
+$('.exit').click(function (e) { 
   e.preventDefault();
-  $(".chat-pop").show();
+  $('.chat-pop').hide();
 });
 
 $(".play").click(function (e) {
@@ -284,6 +304,7 @@ $(".play").click(function (e) {
     $(this).parent().hide();
     setInterval(clockCount, 1000);
     addQuestion();
+    $('.lifeline, .clock').show();
     message.text("Okay let' start with the first question.");
   });
   // $(this).hide();
@@ -342,7 +363,7 @@ function checkWin() {
 function addQuestion() {
   let ans = "";
   questions[currentIndex].answers.forEach((item) => {
-    ans += `<button class="ansBtn">${item}</button>`;
+    ans += `<button class="ansBtn" val="${item.slice(3)}">${item}</button>`;
   });
   question.innerHTML = `
     <div class=question>

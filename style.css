@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
+@font-face {
+    font-family: '04b';
+    src: url('assets/fonts/04B_30__.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'vcr osd mono';
+    src: url('assets/fonts/VCR_OSD_MONO_1.001.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 *{
     font-family: Poppins;
     color: #fff;
@@ -44,7 +58,8 @@ body{
 }
 .messageBox p{
     color: #000;
-    font-family: "Pixelify Sans";
+    /* font-family: "Pixelify Sans"; */
+    font-family: "vcr osd mono";
     font-weight: 600;
     font-size: 16px;
 }
@@ -61,13 +76,22 @@ body{
 .start-menu{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: absolute;
+    background-image: url('assets/logoBack.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    aspect-ratio: 16/9;
+
+    width: 500px;
 
     bottom: 100%;
-    left: 35%;
+    left: 25%;
 }
 .start-menu img {
-    width: 300px;
+    width: 280px;
 }
 .play{
     background-color: transparent;
@@ -75,7 +99,7 @@ body{
     font-size: 40px;
     padding: 20px;
     border: none;
-    /* font-family: pop warner; */
+    font-family: '04b';
 
     transition: all 0.5s;
 }
@@ -94,10 +118,25 @@ body{
     bottom: -10px;
 }
 .lifeline button{
-    background-color: #101111;
-    height: 50px;
-    width: 100px;
+    /* background-color: #101111; */
+    background-image: url('assets/lifeActive.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+    height: 75px;
+    width: 150px;
     border-radius: 8px;
+
+    font-family: '04b';
+    font-size: 16px;
+    color: #421f1d;
+    
+    cursor: pointer;
+}
+.lifeline button:hover{
+    filter: brightness(1.5);
 }
 
 .question-container{
@@ -179,6 +218,25 @@ body{
     z-index: 99;
     width: 100vw;
     height: 100vh;
+}
+.chat-pop .title h4{
+    font-family: '04b';
+    margin-left: 20px;
+    font-size: 24px;
+}
+
+.chat-pop .exit{
+    background-image: url('assets/x.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+
+
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    margin-right: 20px;
 }
 
 .chat-pop .blur{
