@@ -192,6 +192,12 @@ const winningJokes = [
   {
     joke: "You did it! You’ve won a lot of money and possibly made everyone else question their life choices!",
   },
+  {
+    joke: "You have earned the million dollars and more importantly, made everyone watching feel stupid",
+  },
+  {
+    joke: "You did it! And with that I have to run out of here because I don't have the cash",
+  },
 ];
 
 const losingJokes = [
@@ -200,6 +206,12 @@ const losingJokes = [
   },
   {
     joke: "You didn’t win, but don’t worry, you’ve still achieved the ‘almost’ status with flying colors!",
+  },
+  {
+    joke: "You might have lost a million but you will also get broken dreams to go.",
+  },
+  {
+    joke: "You didn't win but atleast we all know now that you aren't special.",
   },
 ];
 doubleOrNothhingQuestions = shuffleArray(doubleOrNothhingQuestions);
