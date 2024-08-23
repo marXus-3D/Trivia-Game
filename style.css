@@ -63,8 +63,8 @@ body{
     flex-direction: column;
     position: absolute;
 
-    bottom: 50px;
-    left: 35%
+    bottom: 100%;
+    left: 35%;
 }
 .start-menu img {
     width: 300px;
@@ -91,7 +91,7 @@ body{
     align-items: center;
     gap: 30px;
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
 }
 .lifeline button{
     background-color: #101111;
@@ -134,6 +134,19 @@ body{
     cursor: pointer;
 }
 
+.win-screen {
+    position: absolute;
+    bottom: 0;
+    height: 42%;
+}
+
+.win-screen h2{
+    font-size: 70px;
+}
+.win-screen p{
+    font-size: 60px;
+}
+
 .top-bar{
     display: flex;
     justify-content: space-between;
@@ -157,19 +170,6 @@ body{
 .top-bar button:hover{
     font-size: 20px;
     transition: all 0.5s ease;
-}
-
-.win-screen {
-    position: absolute;
-    bottom: 0;
-    height: 42%;
-}
-
-.win-screen h2{
-    font-size: 70px;
-}
-.win-screen p{
-    font-size: 60px;
 }
 
 .chat-pop{
