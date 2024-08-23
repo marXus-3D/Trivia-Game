@@ -318,6 +318,17 @@ body{
     
     align-self: flex-start;
 }
+.sendBtn{
+    background-image: url('assets/chat.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+}
 
 /* @media (min-width ) {
     
