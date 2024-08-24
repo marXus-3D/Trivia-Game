@@ -391,6 +391,8 @@ body{
     border: none;
 }
 
-/* @media (min-width ) {
-    
-} */
+@media (min-width: 1280px) {
+    .chat-pop .chat-section input{
+        width: 20vw;
+    }
+}
