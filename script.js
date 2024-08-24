@@ -282,26 +282,6 @@ const losingJokes = [
   },
 ];
 
-$('.lifeline button').click(function (e) { 
-  e.preventDefault();
-  $(this).css('background-image', 'url("assets/lifeDisable.png")');
-  $(this).prop('disabled', true);
-
-  if($(this).hasClass('aiBtn')){
-    $(".chat-pop").show(200);
-  }
-  if($(this).hasClass('rmv')){
-    const otherButtons = document.querySelectorAll(`.ansBtn[val]:not([val="${questions[currentIndex].correctAnswer}"])`);
-    const idx1 = Math.floor(Math.random() * 3);
-    let idx2;
-    do {
-      idx2 = Math.floor(Math.random() * 3);
-    } while (idx2 === idx1);
-    otherButtons[idx1].style.opacity = "0";
-    otherButtons[idx2].style.opacity = "0";
-  }
-});
-
 doubleOrNothhingQuestions = shuffleArray(doubleOrNothhingQuestions);
 var currentIndex = 0,
   userAnswers = 0,
@@ -316,6 +296,9 @@ const chatSection = $('.chat-view');
 game.appendChild(question);
 
 const audioSource = document.getElementById('audSource');
+const sfxSource = document.getElementById('sfxSource');
+const musicSource = document.getElementById('musicSource');
+
 
 let timerJokeBool = false;
 
@@ -334,8 +317,28 @@ function playMessage(msg) {
 
   audioSource.src = msg.loc;
   audioSource.playbackRate = 1.5;
+  audioSource.volume = 0.5;
 
   audioSource.play();
+}
+
+function playSfx(loc) {
+  sfxSource.pause();
+
+  sfxSource.src = loc;
+  sfxSource.volume = 0.5;
+
+  // audioSource.playbackRate = 1.5;
+
+  sfxSource.play();
+}
+function playMusic(loc) {
+  musicSource.pause();
+
+  musicSource.src = loc;
+  musicSource.volume = 0.1;
+
+  musicSource.play();
 }
 
 $('.exit').click(function (e) { 
@@ -345,6 +348,7 @@ $('.exit').click(function (e) {
 
 $(".play").click(function (e) {
   e.preventDefault();
+  playSfx('assets/audio/answer select.mp3');
   $(".start-menu").slideUp("fast", "swing", () => {
     $(this).parent().hide();
     setInterval(clockCount, 1000);
@@ -355,13 +359,34 @@ $(".play").click(function (e) {
   // $(this).hide();
 });
 
+$('.lifeline button').click(function (e) { 
+  e.preventDefault();
+  playSfx('assets/audio/life line select.mp3');
+  $(this).css('background-image', 'url("assets/lifeDisable.png")');
+  $(this).prop('disabled', true);
+
+  if($(this).hasClass('aiBtn')){
+    $(".chat-pop").show(200);
+  }
+  if($(this).hasClass('rmv')){
+    const otherButtons = document.querySelectorAll(`.ansBtn[val]:not([val="${questions[currentIndex].correctAnswer}"])`);
+    const idx1 = Math.floor(Math.random() * 3);
+    let idx2;
+    do {
+      idx2 = Math.floor(Math.random() * 3);
+    } while (idx2 === idx1);
+    otherButtons[idx1].style.opacity = "0";
+    otherButtons[idx2].style.opacity = "0";
+  }
+});
+
 function checkAnswer(answer) {
   if (answer === questions[currentIndex].correctAnswer) {
-    alert("Correct Answer");
+    playSfx('assets/audio/answer correct.mp3');
     ++userAnswers;
     currentCash *= 5;
   } else {
-    alert("Incorrect Answer");
+    playSfx('assets/audio/wrong answer.mp3');
     currentCash -= currentCash / 5;
   }
   newQuestion();
@@ -418,6 +443,8 @@ function addQuestion() {
             ${ans}
         </div>
     `;
+
+    playMusic('assets/audio/QUESTION TRACK 60 SEC.mp3');
 
   $(".ansBtn").click(function (e) {
     e.preventDefault();
