@@ -32,6 +32,8 @@ body{
 
     border: 1px solid white;
     position: relative;
+
+    overflow: hidden;
 }
 .clock{
     position: absolute;
@@ -42,12 +44,46 @@ body{
     font-weight: 600;
     font-size: 80px;
 }
+
+.moneyDisp{
+    z-index: 9;
+    position: absolute;
+    top: -60px;
+    right: 0;
+    background-image: url('assets/moneyBack.png');
+    background-position: center;
+    background-size: contain;
+    aspect-ratio: 1/1;
+    width: 180px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transform: rotate(-90deg);
+}
+.moneyDisp h3{
+    font-family: '04b';
+    font-size: 24px;
+    transform: rotate(90deg);
+    margin-right: 20px;
+    width: 80%;
+
+    color: gold;
+    text-align: center;
+}
+.moneyDisp h3::after{
+    font-family: 'vcr osd mono';
+    font-size: 30px;
+    content: '$';
+    color: gold;
+}
 .messageBox{
     aspect-ratio: 16/10;
     background-image: url('assets/textbox.png');
     background-position: center;
     background-size: cover;
-    width: 200px;
+    width: 220px;
     left: 54%;
     top: 16%;
     position: absolute;

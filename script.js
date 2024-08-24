@@ -314,6 +314,7 @@ var seconds = 30;
 const message = $(".message");
 const game = document.querySelector(".game");
 const chatSection = $('.chat-view');
+const money = $('.money');
 game.appendChild(question);
 
 const audioSource = document.getElementById('audSource');
@@ -413,7 +414,7 @@ function checkAnswer(answer) {
   if (answer === questions[currentIndex].correctAnswer) {
     playSfx('assets/audio/answer correct.mp3');
     ++userAnswers;
-    currentCash *= 5;
+    editMoney(questions[currentIndex].cashAmount);
 
     if (!winStreak && userAnswers >= currentIndex && currentIndex > questions.length/2) {
       winStreak = true;
@@ -422,7 +423,7 @@ function checkAnswer(answer) {
 
   } else {
     playSfx('assets/audio/wrong answer.mp3');
-    currentCash -= currentCash / 5;
+    editMoney(-1*(questions[currentIndex].cashAmount/2));
 
     if (!loseStreak && userAnswers <= (currentIndex/2) && currentIndex > questions.length/2) {
       loseStreak = true;
@@ -435,7 +436,6 @@ function checkAnswer(answer) {
 
 function newQuestion() {
   $('.chat-pop').hide();
-  $(".money").text("$" + currentCash);
   if (++currentIndex == questions.length) {
     alert(
       `Congratulations you finished You answered ${userAnswers} out of ${questions.length} questions`
@@ -518,8 +518,8 @@ function clockCount() {
   }
 
   if (seconds < 1) {
-    currentCash -= currentCash / 5;
     playSfx('assets/audio/wrong answer.mp3');
+    editMoney(-100);
     newQuestion();
   } else if (seconds < 11) {
     clock.text(`0${--seconds}`);
@@ -599,4 +599,11 @@ $('#chat-form').on('submit', (e)  =>
     .catch(error => {
       console.error(error);
     });
+  }
+
+  function editMoney(amount) {
+    currentCash += amount;
+    if(currentCash < 0)
+      currentCash = 0;
+    money.text(currentCash);
   }
