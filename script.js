@@ -316,6 +316,7 @@ var currentIndex = 0,
 const question = document.createElement("div");
 question.classList += "question-container";
 const clock = $(".clock");
+let clk;
 var seconds = 30;
 const message = $(".message");
 const game = document.querySelector(".game");
@@ -380,7 +381,7 @@ $(".play").click(function (e) {
   playSfx('assets/audio/answer select.mp3');
   $(".start-menu").slideUp("fast", "swing", () => {
     $(this).parent().hide();
-    setInterval(clockCount, 1000);
+    clk = setInterval(clockCount, 1000);
     addQuestion();
     $('.lifeline, .clock').show();
   });
@@ -447,7 +448,7 @@ function newQuestion() {
 }
 
 function checkWin() {
-  seconds = 0;
+  clearInterval(clk);
   if (userAnswers > questions.length * 0.65) {
     $(".question-container").hide();
     $(".win-screen p").text(
