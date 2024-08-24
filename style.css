@@ -281,11 +281,25 @@ body{
     left: 10px;
 }
 .chat-pop .chat-section input{
+    aspect-ratio: 18/4;
+    background-image: url('assets/chat-box.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
     background-color: transparent;
-    border: 1px solid white;
+    border: none;
     border-radius: 10px;
-    height: 40px;
+    padding: 2px 15px;
+    /* height: 40px; */
     width: 30vw;
+}
+.chat-pop .chat-section input:focus{
+    border: none;
+    outline: none;
+    background-size: cover;
+
+    transition: all 0.5s;
 }
 .chat-pop .chat-section .chat-view{
     display: flex;
@@ -312,7 +326,7 @@ body{
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: 10px;
-    text-align: right;
+    text-align: left;
     margin-top: 35px;
     margin-left: 25px;
     

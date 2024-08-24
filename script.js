@@ -286,6 +286,7 @@ const clock = $(".clock");
 var seconds = 30;
 const message = $(".message");
 const game = document.querySelector(".game");
+const chatSection = $('.chat-view');
 game.appendChild(question);
 
 let timerJokeBool = false;
@@ -419,3 +420,54 @@ function timerJoke() {
       .joke
   );
 }
+
+$('#chat-form').on('submit', (e)  => 
+  {
+    e.preventDefault();
+    chatSection.append(
+      `
+      <div class="chat-user">
+          <p>
+            ${$('.chat-box').val()}
+          </p>
+        </div>
+      `
+    );
+    
+    callGemniApi($('.chat-box').val()); 
+  });
+
+  function callGemniApi(prompt) {
+    fetch("https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": `AIzaSyCaCvcbS2zKq7MvWmkVfdZbK4qiVv1Pik0`
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            role: "user",
+            parts : [
+              {
+                text : 'I\'m going to ask you a question for a game show and i want you to answer me in html format as a p tag ' + prompt,
+              }
+            ]
+          }
+        ]
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      chatSection.append(
+        `
+        <div class="chat-ai">
+          ${data.candidates[0].content.parts[0].text}
+        </div>
+        `
+      );
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
