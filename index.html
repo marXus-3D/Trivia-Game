@@ -11,9 +11,9 @@
     <section class="game">
       <main class="gameSection">
         <div class="lifeline">
-          <button id="aiBtn">Ask AI</button>
-          <button>Remove Answers</button>
-          <button>Ask Audience</button>
+          <button class="aiBtn">Ask AI</button>
+          <button class="rmv">Remove<br>Answers</button>
+          <button>Ask<br>Audience</button>
         </div>
         <h4 class="clock">30</h4>
         <div class="messageBox">
@@ -21,7 +21,7 @@
         </div>
         <section class="start-menu">
           <img src="assets/logo.png" alt="">
-        <button class="play">PLAY</button>
+        <button class="play" style="color: #421f1d;">PLAY</button>
       </section><!--
         <header class="top-bar">
           <button id="cashOut">$Cash Out$</button>
@@ -41,21 +41,24 @@
           <button class="ansBtn">B. button</button>
           <button class="ansBtn">C. button</button>
           <button class="ansBtn">D. button</button>
-        </div>
-      </div> -->
+        </div> -->
+      </div>
       <div class="win-screen" style="display: none;">
         <h2>You Win</h2>
         <p>You Answered 9 out of 10 questions.</p>
       </div>
     </section>
    </center>
-   <section class="chat-pop" style="display: none">
+   <section class="chat-pop" style="display: none;">
     <div class="blur"></div>
     <div class="chat-section">
-      <h4>Ask AI</h4>
+      <div class="title" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <h4>Ask AI</h4>
+        <button class="exit"></button>
+      </div>
       <hr />
       <section class="chat-view">
-        <div class="chat-user">
+        <!-- <div class="chat-user">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
             blanditiis officiis explicabo.
@@ -67,50 +70,16 @@
             blanditiis officiis explicabo. Lorem ipsum dolor sit amet
             consectetur adipisicing elit.
           </p>
-        </div>
-        <div class="chat-ai">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
-          </p>
-        </div>
-        <div class="chat-user">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
-          </p>
-        </div>
-        <div class="chat-ai">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
-          </p>
-        </div>
-        <div class="chat-user">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
-          </p>
-        </div>
-        <div class="chat-ai">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-            blanditiis officiis explicabo. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
-          </p>
-        </div>
+        </div> -->
       </section>
-      <form>
+      <form id="chat-form">
         <input
           type="text"
           placeholder="Ask the about your question"
+          class="chat-box"
           required
         />
-        <button class="sendBtn"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000"><path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/></svg></button>
+        <button class="sendBtn" type="submit"></button>
       </form>
     </div>
   </section>
