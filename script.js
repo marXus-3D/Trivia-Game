@@ -337,6 +337,10 @@ window.onload = () => {
 };
 
 function playMessage(msg) {
+  $('.messageBox').show();
+  setTimeout(()=> {
+    $('.messageBox').fadeOut();
+  }, 3000);
   message.text(msg.joke);
   audioSource.pause();
 
