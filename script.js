@@ -329,6 +329,7 @@ let aiQuestions = 3;
 let timerJokeBool = false;
 
 window.onload = () => {
+  $('.moneyDisp').slideUp();
   // $(".start-menu").slideUp("fast", "swing");
   // $(".start-menu").slideDown("fast", "swing");
   $(".start-menu").animate({bottom: "50px"}, 1500, "swing");
@@ -384,6 +385,7 @@ $(".play").click(function (e) {
     clk = setInterval(clockCount, 1000);
     addQuestion();
     $('.lifeline, .clock').show();
+    $('.moneyDisp').slideDown();
   });
   playMessage({joke: "Okay let' start with the first question."});
   // $(this).hide();
@@ -449,6 +451,7 @@ function newQuestion() {
 
 function checkWin() {
   clearInterval(clk);
+  $('.moneyDisp').slideUp();
   if (userAnswers > questions.length * 0.65) {
     $(".question-container").hide();
     $('.win-screen h2').addClass('win');
