@@ -451,6 +451,10 @@ function checkWin() {
   clearInterval(clk);
   if (userAnswers > questions.length * 0.65) {
     $(".question-container").hide();
+    $('.win-screen h2').addClass('win');
+    $('.win-screen h2').text(
+      `You Win ${currentCash + 10000}$`
+    );
     $(".win-screen p").text(
       `You Answered ${userAnswers} out of ${questions.length} questions.`
     );

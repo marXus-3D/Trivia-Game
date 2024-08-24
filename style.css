@@ -235,9 +235,17 @@ body{
 
 .win-screen h2{
     font-size: 70px;
+    font-family: '04b';
+}
+.win-screen .win::after{
+    font-family: 'vcr osd mono';
+    font-size: 80px;
+    content: '$';
+    color: gold;
 }
 .win-screen p{
     font-size: 60px;
+    font-family: 'vcr osd mono';
 }
 
 .top-bar{
