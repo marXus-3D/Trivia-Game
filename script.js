@@ -349,14 +349,14 @@ function playMessage(msg) {
   audioSource.playbackRate = 1.5;
   audioSource.volume = 0.5;
 
-  // audioSource.play();
+  audioSource.play();
 }
 
 function playSfx(loc) {
   sfxSource.pause();
 
   sfxSource.src = loc;
-  sfxSource.volume = 0.5;
+  sfxSource.volume = 0.4;
 
   // audioSource.playbackRate = 1.5;
 
@@ -456,9 +456,11 @@ function checkWin() {
     );
     $(".win-screen").show();
 
-    message.text(
-      winningJokes[Math.floor(Math.random() * winningJokes.length)].joke
-    );
+    playMessage(winningJokes[Math.floor(Math.random() * winningJokes.length)]);
+
+    // message.text(
+    //   winningJokes[Math.floor(Math.random() * winningJokes.length)].joke
+    // );
   } else {
     $(".question-container").hide();
     $(".win-screen h2").text("You Lose");
@@ -466,9 +468,10 @@ function checkWin() {
       `You Answered ${userAnswers} out of ${questions.length} questions.`
     );
     $(".win-screen").show();
-    message.text(
-      losingJokes[Math.floor(Math.random() * losingJokes.length)].joke
-    );
+    playMessage(losingJokes[Math.floor(Math.random() * losingJokes.length)]);
+    // message.text(
+    //   losingJokes[Math.floor(Math.random() * losingJokes.length)].joke
+    // );
   }
 }
 
