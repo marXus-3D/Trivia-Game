@@ -220,39 +220,53 @@ const tooManyWrongQuestionsJokes = [
     joke: "",
   }
 ];
+const tooManyCorrectQuestionsJokes = [
+  {
+    joke: "",
+  }
+];
 const littleTimeLeftJokes = [
   {
     joke: "We’re down to the wire—like a cat on a high shelf, it’s getting exciting up here!",
+    loc: "assets/audio/timerRunout01.mp3",
   },
   {
     joke: "We're almost out of time—better hurry, or you might just be writing a novel on that answer!",
+    loc: "assets/audio/timerRunout02.mp3",
   },
   {
     joke: "The clock’s ticking down! Hurry up before your answer turns into a dinosaur fossil!",
+    loc: "assets/audio/timerRunout03.mp3",
   },
   {
     joke: "Time’s almost up! And if you don’t get this right, well, let’s just say the replay will be entertaining!",
+    loc: "assets/audio/timerRunout04.mp3",
   },
   {
     joke: "We’re almost out of time, and if you don’t hurry, we might need to call in a rescue team!",
+    loc: "assets/audio/timerRunout05.mp3",
   },
 ];
 
 const winningJokes = [
   {
     joke: "Congratulations! You’ve won the game and officially earned bragging rights for the next century!",
+    loc: "assets/audio/winJoke01.mp3",
   },
   {
     joke: "You did it! You’ve won a lot of money and possibly made everyone else question their life choices!",
+    loc: "assets/audio/winJoke02.mp3",
   },
 ];
 
 const losingJokes = [
   {
     joke: "Looks like you didn’t win—don’t worry, you’re still the best at losing with style!",
+    loc: "assets/audio/loseJoke02.mp3",
   },
   {
     joke: "You didn’t win, but don’t worry, you’ve still achieved the ‘almost’ status with flying colors!",
+    loc: "assets/audio/loseJoke01.mp3",
   },
 ];
 
@@ -289,6 +303,8 @@ const game = document.querySelector(".game");
 const chatSection = $('.chat-view');
 game.appendChild(question);
 
+const audioSource = document.getElementById('audSource');
+
 let timerJokeBool = false;
 
 window.onload = () => {
@@ -296,8 +312,19 @@ window.onload = () => {
   // $(".start-menu").slideDown("fast", "swing");
   $(".start-menu").animate({bottom: "50px"}, 1500, "swing");
   $('.lifeline, .clock').hide();
+  playMessage({joke: "Welcome to IZZY Trivia. Press Play to start.", loc: "assets/audio/opening.mp3"})
   // alert('loaded');
 };
+
+function playMessage(msg) {
+  message.text(msg.joke);
+  audioSource.pause();
+
+  audioSource.src = msg.loc;
+  audioSource.playbackRate = 1.5;
+
+  audioSource.play();
+}
 
 $('.exit').click(function (e) { 
   e.preventDefault();
@@ -311,8 +338,8 @@ $(".play").click(function (e) {
     setInterval(clockCount, 1000);
     addQuestion();
     $('.lifeline, .clock').show();
-    message.text("Okay let' start with the first question.");
   });
+  playMessage({joke: "Okay let' start with the first question."});
   // $(this).hide();
 });
 
@@ -415,10 +442,11 @@ function clockCount() {
 }
 
 function timerJoke() {
-  message.text(
-    littleTimeLeftJokes[Math.floor(Math.random() * littleTimeLeftJokes.length)]
-      .joke
-  );
+  playMessage(littleTimeLeftJokes[Math.floor(Math.random() * littleTimeLeftJokes.length)]);
+  // message.text(
+  //   littleTimeLeftJokes[Math.floor(Math.random() * littleTimeLeftJokes.length)]
+  //     .joke
+  // );
 }
 
 $('#chat-form').on('submit', (e)  => 
