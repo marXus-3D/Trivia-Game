@@ -3,23 +3,25 @@ let questions = [
     question: "Who stole the apple.",
     answers: ["A. George", "B. Jamal", "C. William", "D. Tyrone"],
     correctAnswer: "Jamal",
+    cashAmount: 10000,
   },
   {
     question: "What's 9 + 10.",
     answers: ["A. 19", "B. 21", "C. 11", "D. 1"],
     correctAnswer: "21",
+    cashAmount: 10000,
   },
   {
     question: "What is the capital of Ethiopia?",
     answers: ["A. Nairobi", "B. Cairo", "C. Addis Ababa", "D. Johannesburg"],
     correctAnswer: "Addis Ababa",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "Which planet is known as the Red Planet?",
     answers: ["A. Mars", "B. Venus", "C. Jupiter", "D. Saturn"],
     correctAnswer: "Mars",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "Who painted the Mona Lisa?",
@@ -30,7 +32,7 @@ let questions = [
       "D. Rembrandt",
     ],
     correctAnswer: "Leonardo da Vinci",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "What is the largest ocean in the world?",
@@ -41,7 +43,7 @@ let questions = [
       "D. Arctic Ocean",
     ],
     correctAnswer: "Pacific Ocean",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "Who wrote the famous play Romeo and Juliet?",
@@ -52,13 +54,13 @@ let questions = [
       "D. Mark Twain",
     ],
     correctAnswer: "William Shakespeare",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "What is the chemical symbol for gold?",
     answers: ["A. Ag", "B. Au", "C. Fe", "D. Cu"],
     correctAnswer: "Au",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "Who was the first person to walk on the moon?",
@@ -69,19 +71,19 @@ let questions = [
       "D. Yuri Gagarin",
     ],
     correctAnswer: "Neil Armstrong",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "What is the largest country in the world by land area?",
     answers: ["A. China", "B. Russia", "C. Canada", "D. United States"],
     correctAnswer: "Russia",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "What is the capital of Australia?",
     answers: ["A. Sydney", "B. Melbourne", "C. Canberra", "D. Brisbane"],
     correctAnswer: "Canberra",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 1000,
   },
   {
     question: "Who painted the Starry Night?",
@@ -92,7 +94,7 @@ let questions = [
       "D. Leonardo da Vinci",
     ],
     correctAnswer: "Vincent van Gogh",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 1000,
   },
   {
     question: "Which classic novel features the character Sherlock Holmes?",
@@ -103,7 +105,7 @@ let questions = [
       "D. The Hound of Baskervilles",
     ],
     correctAnswer: "The Hound of Baskervilles",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 10000,
   },
   {
     question: 'What is the name of the main character in the novel "1984"?',
@@ -114,38 +116,32 @@ let questions = [
       "D. Holden Caulfield",
     ],
     correctAnswer: "Winston Smith",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 10000,
   },
   {
     question: "What is the largest organ in the human body?",
     answers: ["A. Heart", "B. Liver", "C. Skin", "D. Brain"],
     correctAnswer: "Skin",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "What is the longest river in the world?",
     answers: ["A. Nile", "B. Amazon", "C. Mississippi", "D. Yangtze"],
     correctAnswer: "Nile",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
-  },
-  {
-    question: "Which country is the largest by land area?",
-    answers: ["A. China", "B. Russia", "C. Canada", "D. United States"],
-    correctAnswer: "Russia",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
   {
     question: "Which sport is played on a court with a net?",
     answers: ["A. Soccer", "B. Basketball", "C. Baseball", "D. Tennis"],
     correctAnswer: "Tennis",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 10000,
   },
   {
     question:
       "What is the name of the popular board game that involves buying and selling properties?",
     answers: ["A. Monopoly", "B. Scrabble", "C. Clue", "D. Risk"],
     correctAnswer: "Monopoly",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
+    cashAmount: 100,
   },
 ];
 questions = shuffleArray(questions);
@@ -159,7 +155,6 @@ let doubleOrNothhingQuestions = [
       "D. M8257582",
     ],
     correctAnswer: "M8257582",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
   },
   {
     question: "What is the largest known perfect number?",
@@ -170,14 +165,12 @@ let doubleOrNothhingQuestions = [
       "D. 2^1257787 - 1",
     ],
     correctAnswer: "2^82589933 - 1",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
   },
   {
     question:
       "What is the smallest integer that can be expressed as the sum of three cubes in two different ways?",
     answers: ["A. 1729", "B. 4104", "C. 1065", "D. 2318"],
     correctAnswer: "729",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
   },
   {
     question: "Who was the first woman to win the Nobel Prize in Physics?",
@@ -188,7 +181,6 @@ let doubleOrNothhingQuestions = [
       "D. Sally Ride",
     ],
     correctAnswer: "Marie Curie",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
   },
   {
     question: "Which U.S. president was assassinated on November 22, 1963?",
@@ -199,13 +191,11 @@ let doubleOrNothhingQuestions = [
       "D. Lyndon B. Johnson",
     ],
     correctAnswer: "John F. Kennedy",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
   },
   {
     question: "In what year did the Berlin Wall fall?",
     answers: ["A. 1989", "B. 1991", "C. 1993", "D. 1995"],
     correctAnswer: "1989",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
   },
   {
     question: 'Who wrote the novel "To Kill a Mockingbird"?',
@@ -216,7 +206,6 @@ let doubleOrNothhingQuestions = [
       "D. Mark Twain",
     ],
     correctAnswer: "Harper Lee",
-    lifelines: ["50/50", "Ask the Audience", "Phone a Friend"],
   },
 ];
 
@@ -286,9 +275,11 @@ const winningJokes = [
   },
   {
     joke: "You have earned the million dollars and more importantly, made everyone watching feel stupid",
+    loc: "assets/audio/winJoke03.mp3",
   },
   {
     joke: "You did it! And with that I have to run out of here because I don't have the cash",
+    loc: "assets/audio/winJoke04.mp3",
   },
 ];
 
@@ -303,9 +294,11 @@ const losingJokes = [
   },
   {
     joke: "You might have lost a million but you will also get broken dreams to go.",
+    loc: "assets/audio/loseJoke04.mp3",
   },
   {
     joke: "You didn't win but atleast we all know now that you aren't special.",
+    loc: "assets/audio/loseJoke03.mp3",
   },
 ];
 
@@ -328,6 +321,8 @@ const sfxSource = document.getElementById('sfxSource');
 const musicSource = document.getElementById('musicSource');
 
 let winStreak = false, loseStreak = false; 
+
+let aiQuestions = 3;
 
 
 let timerJokeBool = false;
@@ -435,6 +430,7 @@ function checkAnswer(answer) {
 }
 
 function newQuestion() {
+  $('.chat-pop').hide();
   $(".money").text("$" + currentCash);
   if (++currentIndex == questions.length) {
     alert(
@@ -519,6 +515,7 @@ function clockCount() {
 
   if (seconds < 1) {
     currentCash -= currentCash / 5;
+    playSfx('assets/audio/wrong answer.mp3');
     newQuestion();
   } else if (seconds < 11) {
     clock.text(`0${--seconds}`);
@@ -536,17 +533,33 @@ function timerJoke() {
 $('#chat-form').on('submit', (e)  => 
   {
     e.preventDefault();
+    if (aiQuestions-->0) {
+      chatSection.append(
+        `
+        <div class="chat-user">
+            <p>
+              ${$('.chat-box').val()}
+            </p>
+          </div>
+        `
+      );
+      
+      callGemniApi($('.chat-box').val()); 
+  }
+  else {
     chatSection.append(
       `
       <div class="chat-user">
           <p>
-            ${$('.chat-box').val()}
+            'You're out of questions!'
           </p>
         </div>
       `
     );
-    
-    callGemniApi($('.chat-box').val()); 
+    setTimeout(1000, () => {
+      $('.chat-pop').hide();
+    });
+  }
   });
 
   function callGemniApi(prompt) {
