@@ -5,6 +5,11 @@ let questions = [
     correctAnswer: "Jamal",
   },
   {
+    question: "What's 9 + 10.",
+    answers: ["A. 19", "B. 21", "C. 11", "D. 1"],
+    correctAnswer: "21",
+  },
+  {
     question: "What is the capital of Ethiopia?",
     answers: ["A. Nairobi", "B. Cairo", "C. Addis Ababa", "D. Johannesburg"],
     correctAnswer: "Addis Ababa",
@@ -217,13 +222,35 @@ let doubleOrNothhingQuestions = [
 
 const tooManyWrongQuestionsJokes = [
   {
-    joke: "",
-  }
+    joke: "I’ve seen people struggle before, but you’re really giving it a new definition. Should we start a new category called ‘Creative Guessing’?",
+    loc: "assets/audio/opening.mp3",
+  },
+  {
+    joke: "I have to say, your guessing skills are truly… unique. You’re redefining what it means to take a chance!",
+    loc: "assets/audio/opening.mp3",
+  },
+  {
+    joke: "I’ve seen people get answers wrong before, but you’re turning it into an art form. I might need to start taking notes!",
+    loc: "assets/audio/opening.mp3",
+  },
+  {
+    joke: "I see you’ve discovered the ‘how not to win a game show’ strategy. You’re really setting a new standard here.",
+    loc: "assets/audio/opening.mp3",
+  },
 ];
 const tooManyCorrectQuestionsJokes = [
   {
-    joke: "",
-  }
+    joke: "You’re making me look bad with all these correct answers. I’m going to need a new job if you keep this up!",
+    loc: "assets/audio/opening.mp3",
+  },
+  {
+    joke: "You’re acing every question. Do you have a PhD in trivia or are you just showing off?",
+    loc: "assets/audio/opening.mp3",
+  },
+  {
+    joke: "Are you sure you’re not getting help from a team of trivia nerds? Because you’re making this look way too easy!",
+    loc: "assets/audio/opening.mp3",
+  },
 ];
 const littleTimeLeftJokes = [
   {
@@ -299,6 +326,8 @@ const audioSource = document.getElementById('audSource');
 const sfxSource = document.getElementById('sfxSource');
 const musicSource = document.getElementById('musicSource');
 
+let winStreak = false, loseStreak = false; 
+
 
 let timerJokeBool = false;
 
@@ -319,7 +348,7 @@ function playMessage(msg) {
   audioSource.playbackRate = 1.5;
   audioSource.volume = 0.5;
 
-  audioSource.play();
+  // audioSource.play();
 }
 
 function playSfx(loc) {
@@ -385,9 +414,21 @@ function checkAnswer(answer) {
     playSfx('assets/audio/answer correct.mp3');
     ++userAnswers;
     currentCash *= 5;
+
+    if (!winStreak && userAnswers >= currentIndex && currentIndex > questions.length/2) {
+      winStreak = true;
+      playMessage(tooManyCorrectQuestionsJokes[Math.floor(Math.random() * tooManyCorrectQuestionsJokes.length)]);
+    }
+
   } else {
     playSfx('assets/audio/wrong answer.mp3');
     currentCash -= currentCash / 5;
+
+    if (!loseStreak && userAnswers <= (currentIndex/2) && currentIndex > questions.length/2) {
+      loseStreak = true;
+      playMessage(tooManyWrongQuestionsJokes[Math.floor(Math.random() * tooManyWrongQuestionsJokes.length)]);
+    }
+
   }
   newQuestion();
 }
