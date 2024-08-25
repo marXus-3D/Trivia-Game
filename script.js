@@ -326,7 +326,7 @@ let winStreak = false,
 
 let aiQuestions = 3;
 
-let timerJokeBool = false, legacyAudio = false;
+let timerJokeBool = false, legacyAudio = $("#audioToggle").is(":checked");
 
 window.onload = () => {
   $(".moneyDisp").slideUp();
@@ -342,7 +342,6 @@ window.onload = () => {
 };
 
 function addPixelToFilePath(filePath) {
-  // Find the position of the '.mp3' extension
   const extensionIndex = filePath.lastIndexOf('.mp3');
 
   if (extensionIndex !== -1) {
@@ -364,7 +363,7 @@ function playMessage(msg) {
     audioSource.src = msg.loc;
   else
     audioSource.src = addPixelToFilePath(msg.loc);
-  
+
   audioSource.playbackRate = 1.5;
   audioSource.volume = 0.5;
 
