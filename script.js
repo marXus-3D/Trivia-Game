@@ -455,6 +455,10 @@ function toggleArt() {
       'left':' 36.2%',
       'top': '13.5%',
     });
+    $(".moneyDisp").css({
+      'background-image': "url('assets/moneyBack.png')",
+      'color': 'gold',
+    });
     $(".messageBox").css({
       'left': '54%',
       'top': '16%',
@@ -467,6 +471,10 @@ function toggleArt() {
     $(".clock").css({
       'left':' 20%',
       'top': '10%',
+    });
+    $(".moneyDisp, .moneyDisp h3").css({
+      'background-image': 'none',
+      'color': 'white',
     });
     $(".messageBox").css({
       'left': '45%',
