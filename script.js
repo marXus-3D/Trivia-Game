@@ -408,7 +408,7 @@ $(".play").click(function (e) {
     $(".lifeline, .clock").show();
     $(".moneyDisp").slideDown();
   });
-  playMessage({ joke: "Okay let' start with the first question." });
+  playMessage({ joke: "Okay let' start with the first question.", loc:"assets/audio/lettuce.mp3" });
   // $(this).hide();
 });
 
