@@ -313,40 +313,58 @@ let clk;
 var seconds = 30;
 const message = $(".message");
 const game = document.querySelector(".game");
-const chatSection = $('.chat-view');
-const money = $('.money');
+const chatSection = $(".chat-view");
+const money = $(".money");
 game.appendChild(question);
 
-const audioSource = document.getElementById('audSource');
-const sfxSource = document.getElementById('sfxSource');
-const musicSource = document.getElementById('musicSource');
+const audioSource = document.getElementById("audSource");
+const sfxSource = document.getElementById("sfxSource");
+const musicSource = document.getElementById("musicSource");
 
-let winStreak = false, loseStreak = false; 
+let winStreak = false,
+  loseStreak = false;
 
 let aiQuestions = 3;
 
-
-let timerJokeBool = false;
+let timerJokeBool = false, legacyAudio = false;
 
 window.onload = () => {
-  $('.moneyDisp').slideUp();
+  $(".moneyDisp").slideUp();
   // $(".start-menu").slideUp("fast", "swing");
   // $(".start-menu").slideDown("fast", "swing");
-  $(".start-menu").animate({bottom: "50px"}, 1500, "swing");
-  $('.lifeline, .clock').hide();
-  playMessage({joke: "Welcome to IZZY Trivia. Press Play to start.", loc: "assets/audio/opening.mp3"})
+  $(".start-menu").animate({ bottom: "50px" }, 1500, "swing");
+  $(".lifeline, .clock").hide();
+  playMessage({
+    joke: "Welcome to IZZY Trivia. Press Play to start.",
+    loc: "assets/audio/opening.mp3",
+  });
   // alert('loaded');
 };
 
+function addPixelToFilePath(filePath) {
+  // Find the position of the '.mp3' extension
+  const extensionIndex = filePath.lastIndexOf('.mp3');
+
+  if (extensionIndex !== -1) {
+      return filePath.substring(0, extensionIndex) + 'pixel' + filePath.substring(extensionIndex);
+  }
+  
+  return filePath;
+}
+
 function playMessage(msg) {
-  $('.messageBox').show();
-  setTimeout(()=> {
-    $('.messageBox').fadeOut();
+  $(".messageBox").show();
+  setTimeout(() => {
+    $(".messageBox").fadeOut();
   }, 3000);
   message.text(msg.joke);
   audioSource.pause();
 
-  audioSource.src = msg.loc;
+  if(legacyAudio)
+    audioSource.src = msg.loc;
+  else
+    audioSource.src = addPixelToFilePath(msg.loc);
+  
   audioSource.playbackRate = 1.5;
   audioSource.volume = 0.5;
 
@@ -372,36 +390,38 @@ function playMusic(loc) {
   musicSource.play();
 }
 
-$('.exit').click(function (e) { 
+$(".exit").click(function (e) {
   e.preventDefault();
-  $('.chat-pop').hide();
+  $(".chat-pop").hide();
 });
 
 $(".play").click(function (e) {
   e.preventDefault();
-  playSfx('assets/audio/answer select.mp3');
+  playSfx("assets/audio/answer select.mp3");
   $(".start-menu").slideUp("fast", "swing", () => {
     $(this).parent().hide();
     clk = setInterval(clockCount, 1000);
     addQuestion();
-    $('.lifeline, .clock').show();
-    $('.moneyDisp').slideDown();
+    $(".lifeline, .clock").show();
+    $(".moneyDisp").slideDown();
   });
-  playMessage({joke: "Okay let' start with the first question."});
+  playMessage({ joke: "Okay let' start with the first question." });
   // $(this).hide();
 });
 
-$('.lifeline button').click(function (e) { 
+$(".lifeline button").click(function (e) {
   e.preventDefault();
-  playSfx('assets/audio/life line select.mp3');
-  $(this).css('background-image', 'url("assets/lifeDisable.png")');
-  $(this).prop('disabled', true);
+  playSfx("assets/audio/life line select.mp3");
+  $(this).css("background-image", 'url("assets/lifeDisable.png")');
+  $(this).prop("disabled", true);
 
-  if($(this).hasClass('aiBtn')){
+  if ($(this).hasClass("aiBtn")) {
     $(".chat-pop").show(200);
   }
-  if($(this).hasClass('rmv')){
-    const otherButtons = document.querySelectorAll(`.ansBtn[val]:not([val="${questions[currentIndex].correctAnswer}"])`);
+  if ($(this).hasClass("rmv")) {
+    const otherButtons = document.querySelectorAll(
+      `.ansBtn[val]:not([val="${questions[currentIndex].correctAnswer}"])`
+    );
     const idx1 = Math.floor(Math.random() * 3);
     let idx2;
     do {
@@ -412,32 +432,54 @@ $('.lifeline button').click(function (e) {
   }
 });
 
+$("#audioToggle").on("change", () => {
+  if ($("#audioToggle").is(":checked")) {
+    legacyAudio = true;
+  } else {
+    legacyAudio = false;
+  }
+});
+
 function checkAnswer(answer) {
   if (answer === questions[currentIndex].correctAnswer) {
-    playSfx('assets/audio/answer correct.mp3');
+    playSfx("assets/audio/answer correct.mp3");
     ++userAnswers;
     editMoney(questions[currentIndex].cashAmount);
 
-    if (!winStreak && userAnswers >= currentIndex && currentIndex > questions.length/2) {
+    if (
+      !winStreak &&
+      userAnswers >= currentIndex &&
+      currentIndex > questions.length / 2
+    ) {
       winStreak = true;
-      playMessage(tooManyCorrectQuestionsJokes[Math.floor(Math.random() * tooManyCorrectQuestionsJokes.length)]);
+      playMessage(
+        tooManyCorrectQuestionsJokes[
+          Math.floor(Math.random() * tooManyCorrectQuestionsJokes.length)
+        ]
+      );
     }
-
   } else {
-    playSfx('assets/audio/wrong answer.mp3');
-    editMoney(-1*(questions[currentIndex].cashAmount/2));
+    playSfx("assets/audio/wrong answer.mp3");
+    editMoney(-1 * (questions[currentIndex].cashAmount / 2));
 
-    if (!loseStreak && userAnswers <= (currentIndex/2) && currentIndex > questions.length/2) {
+    if (
+      !loseStreak &&
+      userAnswers <= currentIndex / 2 &&
+      currentIndex > questions.length / 2
+    ) {
       loseStreak = true;
-      playMessage(tooManyWrongQuestionsJokes[Math.floor(Math.random() * tooManyWrongQuestionsJokes.length)]);
+      playMessage(
+        tooManyWrongQuestionsJokes[
+          Math.floor(Math.random() * tooManyWrongQuestionsJokes.length)
+        ]
+      );
     }
-
   }
   newQuestion();
 }
 
 function newQuestion() {
-  $('.chat-pop').hide();
+  $(".chat-pop").hide();
   if (++currentIndex == questions.length) {
     alert(
       `Congratulations you finished You answered ${userAnswers} out of ${questions.length} questions`
@@ -451,13 +493,11 @@ function newQuestion() {
 
 function checkWin() {
   clearInterval(clk);
-  $('.moneyDisp').slideUp();
+  $(".moneyDisp").slideUp();
   if (userAnswers > questions.length * 0.65) {
     $(".question-container").hide();
-    $('.win-screen h2').addClass('win');
-    $('.win-screen h2').text(
-      `You Win ${currentCash + 10000}$`
-    );
+    $(".win-screen h2").addClass("win");
+    $(".win-screen h2").text(`You Win ${currentCash + 10000}$`);
     $(".win-screen p").text(
       `You Answered ${userAnswers} out of ${questions.length} questions.`
     );
@@ -496,7 +536,7 @@ function addQuestion() {
         </div>
     `;
 
-    playMusic('assets/audio/QUESTION TRACK 60 SEC.mp3');
+  playMusic("assets/audio/QUESTION TRACK 60 SEC.mp3");
 
   $(".ansBtn").click(function (e) {
     e.preventDefault();
@@ -525,7 +565,7 @@ function clockCount() {
   }
 
   if (seconds < 1) {
-    playSfx('assets/audio/wrong answer.mp3');
+    playSfx("assets/audio/wrong answer.mp3");
     editMoney(-100);
     newQuestion();
   } else if (seconds < 11) {
@@ -534,30 +574,30 @@ function clockCount() {
 }
 
 function timerJoke() {
-  playMessage(littleTimeLeftJokes[Math.floor(Math.random() * littleTimeLeftJokes.length)]);
+  playMessage(
+    littleTimeLeftJokes[Math.floor(Math.random() * littleTimeLeftJokes.length)]
+  );
   // message.text(
   //   littleTimeLeftJokes[Math.floor(Math.random() * littleTimeLeftJokes.length)]
   //     .joke
   // );
 }
 
-$('#chat-form').on('submit', (e)  => 
-  {
-    e.preventDefault();
-    if (aiQuestions-->0) {
-      chatSection.append(
-        `
+$("#chat-form").on("submit", (e) => {
+  e.preventDefault();
+  if (aiQuestions-- > 0) {
+    chatSection.append(
+      `
         <div class="chat-user">
             <p>
-              ${$('.chat-box').val()}
+              ${$(".chat-box").val()}
             </p>
           </div>
         `
-      );
-      
-      callGemniApi($('.chat-box').val()); 
-  }
-  else {
+    );
+
+    callGemniApi($(".chat-box").val());
+  } else {
     chatSection.append(
       `
       <div class="chat-user">
@@ -568,33 +608,38 @@ $('#chat-form').on('submit', (e)  =>
       `
     );
     setTimeout(1000, () => {
-      $('.chat-pop').hide();
+      $(".chat-pop").hide();
     });
   }
-  });
+});
 
-  function callGemniApi(prompt) {
-    fetch("https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent", {
+function callGemniApi(prompt) {
+  fetch(
+    "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent",
+    {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-goog-api-key": `AIzaSyCaCvcbS2zKq7MvWmkVfdZbK4qiVv1Pik0`
+        "x-goog-api-key": `AIzaSyCaCvcbS2zKq7MvWmkVfdZbK4qiVv1Pik0`,
       },
       body: JSON.stringify({
         contents: [
           {
             role: "user",
-            parts : [
+            parts: [
               {
-                text : 'I\'m going to ask you a question for a game show and i want you to answer me in html format as a p tag ' + prompt,
-              }
-            ]
-          }
-        ]
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
+                text:
+                  "I'm going to ask you a question for a game show and i want you to answer me in html format as a p tag " +
+                  prompt,
+              },
+            ],
+          },
+        ],
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
       chatSection.append(
         `
         <div class="chat-ai">
@@ -603,14 +648,13 @@ $('#chat-form').on('submit', (e)  =>
         `
       );
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
     });
-  }
+}
 
-  function editMoney(amount) {
-    currentCash += amount;
-    if(currentCash < 0)
-      currentCash = 0;
-    money.text(currentCash);
-  }
+function editMoney(amount) {
+  currentCash += amount;
+  if (currentCash < 0) currentCash = 0;
+  money.text(currentCash);
+}
