@@ -326,7 +326,9 @@ let winStreak = false,
 
 let aiQuestions = 3;
 
-let timerJokeBool = false, legacyAudio = $("#audioToggle").is(":checked");
+let timerJokeBool = false,
+  legacyAudio = $("#audioToggle").is(":checked"),
+  legacyArt = $("#artToggle").is(":checked");
 
 window.onload = () => {
   $(".moneyDisp").slideUp();
@@ -338,16 +340,20 @@ window.onload = () => {
     joke: "Welcome to IZZY Trivia. Press Play to start.",
     loc: "assets/audio/opening.mp3",
   });
-  // alert('loaded');
+  toggleArt();
 };
 
 function addPixelToFilePath(filePath) {
-  const extensionIndex = filePath.lastIndexOf('.mp3');
+  const extensionIndex = filePath.lastIndexOf(".mp3");
 
   if (extensionIndex !== -1) {
-      return filePath.substring(0, extensionIndex) + 'pixel' + filePath.substring(extensionIndex);
+    return (
+      filePath.substring(0, extensionIndex) +
+      "pixel" +
+      filePath.substring(extensionIndex)
+    );
   }
-  
+
   return filePath;
 }
 
@@ -359,10 +365,8 @@ function playMessage(msg) {
   message.text(msg.joke);
   audioSource.pause();
 
-  if(legacyAudio)
-    audioSource.src = msg.loc;
-  else
-    audioSource.src = addPixelToFilePath(msg.loc);
+  if (legacyAudio) audioSource.src = msg.loc;
+  else audioSource.src = addPixelToFilePath(msg.loc);
 
   audioSource.playbackRate = 1.5;
   audioSource.volume = 0.5;
@@ -438,6 +442,39 @@ $("#audioToggle").on("change", () => {
     legacyAudio = false;
   }
 });
+$("#artToggle").on("change", () => {
+  toggleArt();
+});
+
+function toggleArt() {
+  if ($("#artToggle").is(":checked")) {
+    $(".gameSection").css({
+      "background-image": "url(assets/background.png)",
+    });
+    $(".clock").css({
+      'left':' 36.2%',
+      'top': '13.5%',
+    });
+    $(".messageBox").css({
+      'left': '54%',
+      'top': '16%',
+    });
+    legacyArt = true;
+  } else {
+    $(".gameSection").css({
+      "background-image": "url(assets/background-new.png)",
+    });
+    $(".clock").css({
+      'left':' 20%',
+      'top': '10%',
+    });
+    $(".messageBox").css({
+      'left': '45%',
+      'top': '20%',
+    });
+    legacyArt = false;
+  }
+}
 
 function checkAnswer(answer) {
   if (answer === questions[currentIndex].correctAnswer) {
