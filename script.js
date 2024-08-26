@@ -1,7 +1,7 @@
 let questions = [
   {
     question: "Who stole the apple.",
-    answers: ["A. George", "B. Jamal", "C. William", "D. Tyrone"],
+    answers: ["A. George", "B. Jamal", "C. William", "D. Jimmy"],
     correctAnswer: "Jamal",
     cashAmount: 10000,
   },
@@ -101,8 +101,8 @@ let questions = [
     answers: [
       "A. Pride and Prejudice",
       "B. The Lord of the Rings",
-      "C. The Adventures of Huckleberry Finn",
-      "D. The Hound of Baskervilles",
+      "C. TAHF",
+      "D. THB",
     ],
     correctAnswer: "The Hound of Baskervilles",
     cashAmount: 10000,
@@ -143,8 +143,17 @@ let questions = [
     correctAnswer: "Monopoly",
     cashAmount: 100,
   },
+  {
+    question:
+      "Markos kaladege min yibalal?",
+    answers: ["A. Ayadgim", "B. kebede", "C. Biadeglign", "D. Bayadglign"],
+    correctAnswer: "Biadeglign",
+    cashAmount: 100,
+  },
 ];
 questions = shuffleArray(questions);
+
+// #region
 let doubleOrNothhingQuestions = [
   {
     question: "What is the name of the largest known prime number?",
@@ -301,11 +310,14 @@ const losingJokes = [
     loc: "assets/audio/loseJoke03.mp3",
   },
 ];
+//#end region
 
-doubleOrNothhingQuestions = shuffleArray(doubleOrNothhingQuestions);
+// doubleOrNothhingQuestions = shuffleArray(doubleOrNothhingQuestions);
+
 var currentIndex = 0,
   userAnswers = 0,
   currentCash = 100;
+
 const question = document.createElement("div");
 question.classList += "question-container";
 const clock = $(".clock");
@@ -317,23 +329,26 @@ const chatSection = $(".chat-view");
 const money = $(".money");
 game.appendChild(question);
 
+//getting all audio sources each are different source
 const audioSource = document.getElementById("audSource");
 const sfxSource = document.getElementById("sfxSource");
 const musicSource = document.getElementById("musicSource");
 
+//streaks
 let winStreak = false,
   loseStreak = false;
 
+//total ai questions
 let aiQuestions = 3;
 
+//tracking timerJoke
 let timerJokeBool = false,
   legacyAudio = $("#audioToggle").is(":checked"),
   legacyArt = $("#artToggle").is(":checked");
 
+//called when the webpage loads
 window.onload = () => {
   $(".moneyDisp").slideUp();
-  // $(".start-menu").slideUp("fast", "swing");
-  // $(".start-menu").slideDown("fast", "swing");
   $(".start-menu").animate({ bottom: "50px" }, 1500, "swing");
   $(".lifeline, .clock").hide();
   playMessage({
@@ -343,6 +358,7 @@ window.onload = () => {
   toggleArt();
 };
 
+//adding pixel before the file extension for the legacy audio
 function addPixelToFilePath(filePath) {
   const extensionIndex = filePath.lastIndexOf(".mp3");
 
@@ -357,6 +373,7 @@ function addPixelToFilePath(filePath) {
   return filePath;
 }
 
+//play joke and messages
 function playMessage(msg) {
   $(".messageBox").show();
   setTimeout(() => {
@@ -373,7 +390,7 @@ function playMessage(msg) {
 
   audioSource.play();
 }
-
+//play sound effects
 function playSfx(loc) {
   sfxSource.pause();
 
@@ -393,14 +410,16 @@ function playMusic(loc) {
   musicSource.play();
 }
 
+//exit button event listener for ai chat
 $(".exit").click(function (e) {
   e.preventDefault();
   $(".chat-pop").hide();
 });
-
+//event listener for start menu play button
 $(".play").click(function (e) {
   e.preventDefault();
   playSfx("assets/audio/answer select.mp3");
+  //using a callback function to wait for the animation to finish
   $(".start-menu").slideUp("fast", "swing", () => {
     $(this).parent().hide();
     clk = setInterval(clockCount, 1000);
@@ -412,6 +431,7 @@ $(".play").click(function (e) {
   // $(this).hide();
 });
 
+//lifeline event listener
 $(".lifeline button").click(function (e) {
   e.preventDefault();
   playSfx("assets/audio/life line select.mp3");
@@ -427,6 +447,7 @@ $(".lifeline button").click(function (e) {
     );
     const idx1 = Math.floor(Math.random() * 3);
     let idx2;
+    //recursivley check for a different index
     do {
       idx2 = Math.floor(Math.random() * 3);
     } while (idx2 === idx1);
@@ -435,6 +456,7 @@ $(".lifeline button").click(function (e) {
   }
 });
 
+//event listiner for the legacy toggles
 $("#audioToggle").on("change", () => {
   if ($("#audioToggle").is(":checked")) {
     legacyAudio = true;
@@ -484,6 +506,7 @@ function toggleArt() {
   }
 }
 
+///checks for answer and for win/lose streaks
 function checkAnswer(answer) {
   if (answer === questions[currentIndex].correctAnswer) {
     playSfx("assets/audio/answer correct.mp3");
@@ -492,7 +515,7 @@ function checkAnswer(answer) {
 
     if (
       !winStreak &&
-      userAnswers >= currentIndex &&
+      userAnswers >= (currentIndex*0.6) &&
       currentIndex > questions.length / 2
     ) {
       winStreak = true;
@@ -503,7 +526,7 @@ function checkAnswer(answer) {
       );
     }
   } else {
-    playSfx("assets/audio/wrong answer.mp3");
+    playSfx("assets/audio/lose.mp3");
     editMoney(-1 * (questions[currentIndex].cashAmount / 2));
 
     if (
@@ -522,26 +545,28 @@ function checkAnswer(answer) {
   newQuestion();
 }
 
+//checks if the questions are done if not new question
 function newQuestion() {
   $(".chat-pop").hide();
   if (++currentIndex == questions.length) {
-    alert(
-      `Congratulations you finished You answered ${userAnswers} out of ${questions.length} questions`
-    );
+    // alert(
+    //   `Congratulations you finished You answered ${userAnswers} out of ${questions.length} questions`
+    // );
     checkWin();
   } else {
-    // alert('New Question');
     addQuestion();
   }
 }
 
+//checks if the player won the game or not
 function checkWin() {
   clearInterval(clk);
   $(".moneyDisp").slideUp();
   if (userAnswers > questions.length * 0.65) {
+    playSfx("assets/audio/win.mp3");
     $(".question-container").hide();
     $(".win-screen h2").addClass("win");
-    $(".win-screen h2").text(`You Win ${currentCash + 10000}$`);
+    $(".win-screen h2").text(`You Win ${currentCash + 10000}`);
     $(".win-screen p").text(
       `You Answered ${userAnswers} out of ${questions.length} questions.`
     );
@@ -553,6 +578,7 @@ function checkWin() {
     //   winningJokes[Math.floor(Math.random() * winningJokes.length)].joke
     // );
   } else {
+    playSfx("assets/audio/lose legacy.mp3");
     $(".question-container").hide();
     $(".win-screen h2").text("You Lose");
     $(".win-screen p").text(
@@ -560,12 +586,10 @@ function checkWin() {
     );
     $(".win-screen").show();
     playMessage(losingJokes[Math.floor(Math.random() * losingJokes.length)]);
-    // message.text(
-    //   losingJokes[Math.floor(Math.random() * losingJokes.length)].joke
-    // );
   }
 }
 
+//adds the question to the HTML
 function addQuestion() {
   let ans = "";
   questions[currentIndex].answers.forEach((item) => {
@@ -582,6 +606,7 @@ function addQuestion() {
 
   playMusic("assets/audio/QUESTION TRACK 60 SEC.mp3");
 
+  //event listener for each answer
   $(".ansBtn").click(function (e) {
     e.preventDefault();
     checkAnswer($(this).text().slice(3));
@@ -591,6 +616,7 @@ function addQuestion() {
   timerJokeBool = false;
 }
 
+//shuffling the questios to get different one each time
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -599,7 +625,9 @@ function shuffleArray(array) {
   return array;
 }
 
+//function to check, count the clock
 function clockCount() {
+  //check to play the timer joke
   if (
     !timerJokeBool &&
     seconds < Math.floor(Math.random() * (14 - 6 + 1)) + 6
@@ -608,11 +636,13 @@ function clockCount() {
     timerJokeBool = true;
   }
 
+  //timer runout
   if (seconds < 1) {
     playSfx("assets/audio/wrong answer.mp3");
     editMoney(-100);
     newQuestion();
   } else if (seconds < 11) {
+    //adding 0 to 9 and below
     clock.text(`0${--seconds}`);
   } else clock.text(--seconds);
 }
@@ -621,12 +651,9 @@ function timerJoke() {
   playMessage(
     littleTimeLeftJokes[Math.floor(Math.random() * littleTimeLeftJokes.length)]
   );
-  // message.text(
-  //   littleTimeLeftJokes[Math.floor(Math.random() * littleTimeLeftJokes.length)]
-  //     .joke
-  // );
 }
 
+//event listener to check for chats with the ai
 $("#chat-form").on("submit", (e) => {
   e.preventDefault();
   if (aiQuestions-- > 0) {
@@ -646,17 +673,18 @@ $("#chat-form").on("submit", (e) => {
       `
       <div class="chat-user">
           <p>
-            'You're out of questions!'
+            You're out of questions!
           </p>
         </div>
       `
     );
-    setTimeout(1000, () => {
+    setTimeout(2000, () => {
       $(".chat-pop").hide();
     });
   }
 });
 
+//calling and adding the gemeni api
 function callGemniApi(prompt) {
   fetch(
     "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent",
@@ -697,6 +725,7 @@ function callGemniApi(prompt) {
     });
 }
 
+//editing the user's money
 function editMoney(amount) {
   currentCash += amount;
   if (currentCash < 0) currentCash = 0;
